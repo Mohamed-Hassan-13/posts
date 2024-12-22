@@ -36,6 +36,13 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
+  reducers: {
+    search: (state, action) => {
+      state.posts = state.posts.filter((post) =>
+        post.title.includes(action.payload)
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getallposts.pending, (state) => {
@@ -61,4 +68,5 @@ const postsSlice = createSlice({
       });
   },
 });
+export const { search } = postsSlice.actions;
 export default postsSlice.reducer;
